@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="report_spaceship"
+        model="space.spaceship"
+        string="spaceship report"
+        name="odoo-space.report_spaceship_document"
+        file="odoo-space.report_spaceship"
+        report_type="qweb-html"/>
+
+    <template id="report_spaceship_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 t-field="doc.name" class="mt16"/>
+                        <div class="row mt32 mb32" id="session_info">
+                            <div class="col-auto mw-100 mb-2">
+                                <strong>Max Passengers:</strong>
+                                <t t-if="doc.passengers">
+                                    <span t-field="doc.passengers"/>
+                                </t>
+                            </div>
+                            <div t-if="doc.length" class="col-auto mw-100 mb-2">
+                                <strong>Length:</strong>
+                                <span t-field="doc.length"/>
+                            </div>
+                            <div t-if="doc.width" class="col-auto mw-100 mb-2">
+                                <strong>Width:</strong>
+                                <span t-field="doc.width"/>
+                            </div>
+                        </div>
+                        <h4>Missions</h4>
+                        <table class="table table-sm o_main_table">
+                            <thead>
+                                <tr>
+                                    <th name="th_name">Mission Name</th>
+                                    <th name="th_captain">Captain</th>
+                                    <th name="th_csize">Crew Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.mission_ids" t-as="mission">
+                                    <tr>
+                                        <td t-if="mission.name" name="th_name">
+                                            <span t-field="mission.name"/>
+                                        </td>
+                                        <td t-if="mission.captain_id" name="th_captain">
+                                            <span t-field="mission.captain_id"/>
+                                        </td>
+                                        <td t-if="mission.crew_size" name="th_csize">
+                                            <span t-field="mission.crew_size"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

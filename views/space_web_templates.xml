@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="mission_website">
+            <t t-call="website.layout">
+                <t t-set="title">Space</t>
+                <div class="oe_structure">
+                    <div class="container">
+                        <h1>Missions</h1>
+                        <t t-foreach="missions" t-as="mission">
+                            <h3>
+                                <t t-esc="mission.name"/>
+                            </h3>
+                            <p>Description:
+                                <span t-field="mission.description"/>
+                            </p>
+                            <p>Crew Size:
+                                <span t-field="mission.crew_size"/>
+                            </p>
+                            <p>Duration:
+                                <span t-field="mission.launch_date"/>
+                                to
+                                <span t-field="mission.return_date"/>
+                            </p>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
